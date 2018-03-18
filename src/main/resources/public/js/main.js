@@ -54,6 +54,7 @@ var skillValues = [
     ["CSS3", 90],
     ["Sass", 83],
     ["JavaScript", 63],
+    ["Docker", 72],
     ["Neo4J", 60],
     ["Spring", 70],
     ["Dart", 50],
