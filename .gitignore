@@ -13,7 +13,7 @@
 #IntelliJ
 .idea/**
 target/**
-**/.sass-cache/**
+src/main/resourcer/public/.sass-cache/**
 
 # Package Files #
 *.jar
