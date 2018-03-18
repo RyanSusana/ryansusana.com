@@ -1,0 +1,135 @@
+@mixin color-scheme($color, $gradient, $light-foreground:true) {
+  strong {
+    color: $color;
+  }
+  .uk-input:focus,
+  .uk-select:focus,
+  .uk-textarea:focus {
+      border-color: $color;
+  }
+
+
+  .control-left:focus,
+  .control-right:focus {
+    outline: none;
+  }
+  a,
+  button {
+    color: $color;
+    transition: 0.3s all;
+
+    &:hover {
+      color: darken($color, 10%);
+      text-decoration: none;
+    }
+  }
+
+  .uk-progress::-webkit-progress-bar {
+    @if $light-foreground == true {
+      background-color: $light-grey;
+    } @else {
+      background-color: $dark-grey;
+    }
+    @if(mixin-exists(hook-progress)) {
+      @include hook-progress();
+    }
+  }
+
+  .uk-progress::-webkit-progress-value {
+    background-color: $color;
+    transition: width 0.6s ease;
+    @if(mixin-exists(hook-progress-bar)) {
+      @include hook-progress-bar();
+    }
+  }
+
+  .uk-progress::-moz-progress-bar {
+    background-color: $color;
+    @if(mixin-exists(hook-progress-bar)) {
+      @include hook-progress-bar();
+    }
+  }
+
+  .uk-progress::-ms-fill {
+    background-color: $color;
+    transition: width 0.6s ease;
+    /* 1 */
+    border: 0;
+    @if(mixin-exists(hook-progress-bar)) {
+      @include hook-progress-bar();
+    }
+  }
+
+  .themed-box {
+    @if $light-foreground == true {
+      color: $button-primary-color;
+    } @else {
+      color: $dark-grey;
+    }
+    @include tint-over($gradient);
+  }
+
+  .themed-button {
+    background-color: $color;
+    border-radius: 0.1rem;
+    text-transform: none;
+    font-family: $raleway;
+    @if $light-foreground == true {
+      color: $button-primary-color;
+      //border: 1px solid darken($color, 5%);
+    } @else {
+      color: $dark-grey;
+      //border: 1px solid lighten($color, 5%);
+    }
+    transition: 0.3s all;
+
+    &:hover {
+      @if $light-foreground == true {
+        color: $button-primary-color;
+        background-color: darken($color, 10%);
+      } @else {
+        color: $dark-grey;
+        background-color: lighten($color, 10%);
+      }
+    }
+
+    .button-icon-right {
+      margin-left: 1rem;
+      margin-right: -1rem;
+      margin-top: -0.1rem;
+    }
+
+    .button-icon-left {
+      margin-right: 1rem;
+      margin-top: -0.1rem;
+    }
+  }
+
+  .banner-description-background {
+    @include tint-over($gradient);
+  }
+
+  .gradient-overlay {
+    @include tint-over($gradient);
+  }
+}
+
+.theme-1 {
+  @include color-scheme(darken(#f96,10%), linear-gradient(to right, #ff5e62, #ff9966));
+}
+
+.theme-2 {
+  @include color-scheme(#C6426E, linear-gradient(to right, #C6426E, #642B73));
+}
+
+.theme-3 {
+  @include color-scheme($global-primary-background, linear-gradient(to right, #5B86E5, #36D1DC), true);
+}
+
+.theme-4 {
+  @include color-scheme(#45B649, linear-gradient(to right, #45B649, #DCE35B), true);
+}
+
+  .themed-button {
+    margin-bottom: 2vh;
+  }
