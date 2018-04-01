@@ -49,7 +49,6 @@ fun main(args: Array<String>) {
         }
     }
 
-    println(Gson().toJson(BusinessCase("watkan", "Watkan Trading N.V.", Description("This is a really long text lol ok i think lol ok k okdjwnwd jefo", ""), Link("#", "View online"), "2016-2018", Arrays.asList("/images/bg1.jpg"))));
     get("/") {
         val model = mutableMapOf<String, Any>()
         model.put("businessCases", businessCaseDao.getAll())
