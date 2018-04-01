@@ -31,7 +31,8 @@
                     <img class="uk-border-circle"
                          src="https://media.licdn.com/dms/image/C5603AQE-FO_cFB8SMA/profile-displayphoto-shrink_200_200/0?e=1526342400&v=alpha&t=aG66xWo3pcIIDIsFJjyMIoB6z0fF89Fds4THVKPOG-g">
                 </div>
-                <p>A young, passionate full-stack developer currently based in the Netherlands. I've been writing code for over 7 years
+                <p>A young, passionate full-stack developer currently based in the Netherlands. I've been writing code
+                    for over 7 years
                     now and I love it!</p>
 
 
@@ -65,10 +66,11 @@
         <div class="banner-description  uk-width-1-1@s uk-width-3-5@m uk-flex uk-flex-center uk-flex-middle">
 
             <div uk-parallax="opacity: 0,1; x: 130,0;  viewport: 0.5;"
-                 class="description-box uk-width-1-1@s uk-width-1-2@m">
+                 class="description-box uk-width-1-1@s uk-width-4-5@m uk-width-1-2@l">
                 <h2>I'm a <strong>Developer</strong>!</h2>
                 <hr>
-                <p>A full-stack developer with strong roots in Object-Oriented Programming with Java. Here is a small graphic illustrating my skill-set (bar indicates experience).</p>
+                <p>A full-stack developer with strong roots in Object-Oriented Programming with Java. Here is a small
+                    graphic illustrating my skill-set (bar indicates experience).</p>
 
                 <h3 id="skill-selection">Java</h3>
                 <div class="skill-control">
@@ -86,21 +88,53 @@
 
         </div>
     </section>
-    <section id="learn-more" class="banner banner-3-4 uk-flex theme-3">
+    <section id="learn-more" class="banner banner-5-4 uk-flex theme-3">
 
-        <div class="banner-description  uk-width-1-1@s uk-width-3-5@m uk-flex uk-flex-center uk-flex-middle">
+        <div class="banner-description  uk-width-1-1@s uk-width-4-5@m uk-flex uk-flex-center uk-flex-middle">
 
-            <div uk-parallax="opacity: 0,1; x: -130,0;  viewport: 0.5;"
-                 class="description-box uk-width-1-1@s uk-width-1-2@m">
+            <div uk-parallax="opacity: 0,1; x: -130,0;  viewport: 0.3;"
+                 class="description-box uk-width-1-1@s uk-width-4-5@m uk-width-1-2@l">
                 <h2>My <strong>Portfolio</strong>!</h2>
                 <hr>
-                <p>You can view all of my <a target="_blank" href="https://github.com/RyanSusana">open-source projects on GitHub</a>! Furthermore, I have described a set of business cases that I completed either on my own, or with a small
-                    team.</p>
-                <a href = "/BusinessCases_RyanSusana.pdf" class="uk-button themed-button uk-button-large"><span
-                        class="button-icon-left  animated infinite tada" uk-icon="icon:  download"></span>Business Cases (PDF)
-                </a>
+
+                <div uk-slider="autoplay:true; autoplay-interval: 3500">
+
+                    <div class="uk-position-relative uk-visible-toggle uk-light">
+
+                        <ul class="uk-slider-items uk-child-width-2-3@s uk-grid">
+                        {% for businessCase in businessCases%}
+                            <li>
+                                <div class="uk-card uk-card-default">
+                                    <div class="uk-card-media-top uk-background-cover"
+                                         style="background-image: url('{{ businessCase.images | first }}'); height: 20vh;">
+
+                                    </div>
+                                    <div class="uk-card-body">
+                                        <h3 class="uk-card-title">{{ businessCase.title }}</h3>
+                                        <p class="uk-card-title">{{ businessCase.date }}</p>
+                                        <p class="card-text">{{ businessCase.description.short }}</p>
+                                        <a href="{{ businessCase.link.location }}">{{ businessCase.link.linkText }}</a>
+                                    </div>
+                                </div>
+                            </li>
+                        {%endfor%}
+                        </ul>
+
+
+                        <a class="uk-position-center-left uk-position-small " href="#"
+                           uk-slidenav-previous uk-slider-item="previous"></a>
+                        <a class="uk-position-center-right uk-position-small " href="#" uk-slidenav-next
+                           uk-slider-item="next"></a>
+
+                    </div>
+
+                    <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+
+                </div>
+                <p>I release open-source projects on my personal GitHub page. This site also happens to be open-source.</p>
                 <a target="_blank" href="https://github.com/RyanSusana" class="uk-button themed-button uk-button-large"><span
-                        class="button-icon-left  animated infinite jello" uk-icon="icon:  github"></span>My GitHub</a>
+                        class="button-icon-left  animated infinite jello" uk-icon="icon:  github"></span>View
+                    open-source work</a>
             </div>
 
             <div class="banner-description-background  gradient-overlay uk-background-cover"
@@ -123,10 +157,11 @@
         <div class="banner-description  theme-4 uk-width-1-1@s uk-width-3-5@m uk-flex uk-flex-center uk-flex-middle">
 
             <div uk-parallax="opacity: 0,1; x: 130,0;  viewport: 0.5;"
-                 class="description-box uk-width-1-1@s uk-width-1-2@m">
+                 class="description-box uk-width-1-1@s uk-width-4-5@m uk-width-1-2@l">
                 <h2>Get in <strong>Contact</strong>!</h2>
                 <hr>
-                <p>Do you have any questions? Are you interested in working with me? Just shoot me a message and I will get back to you shortly!</p>
+                <p>Do you have any questions? Are you interested in working with me? Just shoot me a message and I will
+                    get back to you shortly!</p>
                 <form class="ajax-mail-form" method="post" action="/send-mail">
                     <fieldset class="uk-fieldset">
 
@@ -135,15 +170,16 @@
 
                         </div>
                         <div class="uk-margin">
-                            <input class="uk-input" required name = "email" type="email" placeholder="Email">
+                            <input class="uk-input" required name="email" type="email" placeholder="Email">
                         </div>
 
 
                         <div class="uk-margin">
-                            <textarea class="uk-textarea" required  name  = "message" rows="5" placeholder="Message"></textarea>
+                            <textarea class="uk-textarea" required name="message" rows="5"
+                                      placeholder="Message"></textarea>
                         </div>
                     </fieldset>
-                    <button id = "mail-button" class="uk-button themed-button uk-button-large"><span
+                    <button id="mail-button" class="uk-button themed-button uk-button-large"><span
                             class="button-icon-left" uk-icon="icon:  mail"></span>Send
                     </button>
 
@@ -155,8 +191,9 @@
 
         </div>
     </section>
-    <footer class = "uk-flex uk-flex-center uk-flex-middle">
-        <div class="uk-padding-large uk-text-center"><p>Designed &amp; Developed by Ryan Susana. All rights reserved.</p></div>
+    <footer class="uk-flex uk-flex-center uk-flex-middle">
+        <div class="uk-padding-large uk-text-center"><p>Designed &amp; Developed by Ryan Susana. All rights
+            reserved.</p></div>
 
     </footer>
 </div>
@@ -167,7 +204,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.40/js/uikit-icons.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-<script src = "/js/main.js" ></script>
+<script src="/js/main.js"></script>
 </body>
 
 </html>

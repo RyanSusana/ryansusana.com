@@ -3,7 +3,6 @@
 package com.ryansusana.site
 
 import com.google.gson.Gson
-import org.bson.types.ObjectId
 import org.simplejavamail.email.EmailBuilder
 import org.simplejavamail.mailer.Mailer
 import org.simplejavamail.mailer.MailerBuilder
@@ -19,6 +18,7 @@ import spark.kotlin.delete
 import spark.kotlin.get
 import spark.kotlin.post
 import spark.template.pebble.PebbleTemplateEngine
+import java.util.*
 
 
 val mailer: Mailer = MailerBuilder
@@ -34,23 +34,26 @@ val businessCaseDao: BusinessCaseDao = BusinessCaseDao(System.getenv("database_s
 
 
 fun main(args: Array<String>) {
-    if(UNLOCK_CODE == null){
+    if (UNLOCK_CODE == null) {
         System.exit(0)
     }
     Spark.port(8091)
     Spark.staticFiles.location("public")
 
-    before{
-        if(!requestMethod().toUpperCase().equals("GET") && uri().contains("/admin")){
+    before {
+        if (!requestMethod().toUpperCase().equals("GET") && uri().contains("/admin")) {
             val key: String? = request.headers("ryan_key");
-            if(key == null || !key.equals(UNLOCK_CODE)){
-                halt(401,"Stop right there bro, you don't belong here!")
+            if (key == null || !key.equals(UNLOCK_CODE)) {
+                halt(401, "Stop right there bro, you don't belong here!")
             }
         }
     }
 
+    println(Gson().toJson(BusinessCase("watkan", "Watkan Trading N.V.", Description("This is a really long text lol ok i think lol ok k okdjwnwd jefo", ""), Link("#", "View online"), "2016-2018", Arrays.asList("/images/bg1.jpg"))));
     get("/") {
-        render(HashMap(), "index.html");
+        val model = mutableMapOf<String, Any>()
+        model.put("businessCases", businessCaseDao.getAll())
+        render(model, "templates/index.peb");
     }
 
     post("/send-mail") {
@@ -67,13 +70,17 @@ fun main(args: Array<String>) {
         }
     }
 
-    post("/admin/bc") {
+
+    get("/admin/business-cases") {
+        Gson().toJson(businessCaseDao.getAll())
+    }
+    post("/admin/business-cases") {
         val businessCase: BusinessCase = Gson().fromJson(request.body(), BusinessCase::class.java)
         businessCaseDao.save(businessCase)
         "Successfully inserted/updated business case";
     }
 
-    delete("/admin/bc/:id") {
+    delete("/admin/business-cases/:id") {
         val businessCase = businessCaseDao.get(params("id"))
         if (businessCase != null) {
             businessCaseDao.delete(businessCase)

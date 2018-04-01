@@ -2,12 +2,20 @@
   strong {
     color: $color;
   }
+  .uk-slidenav {
+    color: $color;
+  }
+
+  .uk-slidenav:hover,
+  .uk-slidenav:focus,
+  .uk-slidenav:active {
+    color: darken($color, 20%);
+  }
   .uk-input:focus,
   .uk-select:focus,
   .uk-textarea:focus {
-      border-color: $color;
+    border-color: $color;
   }
-
 
   .control-left:focus,
   .control-right:focus {
@@ -30,7 +38,7 @@
     } @else {
       background-color: $dark-grey;
     }
-    @if(mixin-exists(hook-progress)) {
+    @if (mixin-exists(hook-progress)) {
       @include hook-progress();
     }
   }
@@ -38,14 +46,14 @@
   .uk-progress::-webkit-progress-value {
     background-color: $color;
     transition: width 0.6s ease;
-    @if(mixin-exists(hook-progress-bar)) {
+    @if (mixin-exists(hook-progress-bar)) {
       @include hook-progress-bar();
     }
   }
 
   .uk-progress::-moz-progress-bar {
     background-color: $color;
-    @if(mixin-exists(hook-progress-bar)) {
+    @if (mixin-exists(hook-progress-bar)) {
       @include hook-progress-bar();
     }
   }
@@ -55,7 +63,7 @@
     transition: width 0.6s ease;
     /* 1 */
     border: 0;
-    @if(mixin-exists(hook-progress-bar)) {
+    @if (mixin-exists(hook-progress-bar)) {
       @include hook-progress-bar();
     }
   }
@@ -115,7 +123,7 @@
 }
 
 .theme-1 {
-  @include color-scheme(darken(#f96,10%), linear-gradient(to right, #ff5e62, #ff9966));
+  @include color-scheme(darken(#f96, 10%), linear-gradient(to right, #ff5e62, #ff9966));
 }
 
 .theme-2 {
@@ -130,6 +138,6 @@
   @include color-scheme(#45B649, linear-gradient(to right, #45B649, #DCE35B), true);
 }
 
-  .themed-button {
-    margin-bottom: 2vh;
-  }
+.themed-button {
+  margin-bottom: 2vh;
+}
